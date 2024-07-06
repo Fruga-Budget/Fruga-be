@@ -59,3 +59,5 @@ group :development do
   # gem "spring"
 end
 
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
