@@ -11,6 +11,7 @@ class AdviceSerializer
     }
   end
 
+  #format each sentence of the response into indices of an array and remove white space
   attribute :gpt_advice do |object|
     object.recommendation.split('. ').map(&:strip)
   end
