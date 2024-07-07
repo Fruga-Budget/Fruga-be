@@ -1,7 +1,7 @@
 class AdviceSerializer
   include JSONAPI::Serializer
   
-  attributes :total_income, :expenses, :gpt_advice
+  attributes :total_income, :expenses, :advice
 
   attribute :expenses do |object|
     {
@@ -12,7 +12,7 @@ class AdviceSerializer
   end
 
   #format each sentence of the response into indices of an array and remove white space
-  attribute :gpt_advice do |object|
-    object.recommendation.split('. ').map(&:strip)
+  attribute :advice do |object|
+    object.advice.split('. ').map(&:strip)
   end
 end
