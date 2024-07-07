@@ -1,7 +1,7 @@
 class FastapiService
 
-def generate_advice(total_income, needs, wants, savings)
-  url = "generate_advice"
+def self.generate_advice(total_income, needs, wants, savings)
+  url = "generate_advice" #this will probably change
   params = {
     total_income: total_income,
     needs: needs,
@@ -9,8 +9,8 @@ def generate_advice(total_income, needs, wants, savings)
     savings: savings
   }
 
-  response = self.class.call_api(url, params)
-  self.class.parse_response(response)
+  response = call_api(url, params) #instance method needs 
+  parse_response(response)
 end
 
   private
