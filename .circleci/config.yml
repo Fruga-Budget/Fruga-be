@@ -12,16 +12,16 @@ jobs: # a collection of steps
           PGHOST: 127.0.0.1
           PGUSER: postgres
           RAILS_ENV: test
-      - image: cimg/16.3-postgism
+      - image: circleci/postgres:11.14-bullseye
         environment: # environment variables for database, it is kind of obvious but it is important that they match with your test config in database.yml
           POSTGRES_USER: postgres
           POSTGRES_DB: mod_4_randomizer_test
           POSTGRES_HOST_AUTH_METHOD: trust
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
-# Which version of bundler?
+      # Which version of bundler?
       - node/install:
-          install-yarn: true    
+          install-yarn: true
           node-version: '16.13'
       - run:
           name: Force Bundler Version
@@ -41,10 +41,10 @@ jobs: # a collection of steps
       - run:
           name: Run rspec in parallel
           command: bundle exec rspec
-# Save test results for timing analysis
+      # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
-# See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
   deploy:
     docker:
       - image: alpine:3.12
@@ -74,4 +74,4 @@ workflows:
             - build-and-test
           filters:
             branches:
-             only: main
+              only: main
