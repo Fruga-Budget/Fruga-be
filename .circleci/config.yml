@@ -22,7 +22,7 @@ jobs: # a collection of steps
       # Which version of bundler?
       - node/install:
           install-yarn: true
-          node-version: '16.13'
+          node-version: '16.15.1'
       - run:
           name: Force Bundler Version
           command: |
@@ -61,6 +61,8 @@ jobs: # a collection of steps
             export FLYCTL_INSTALL="/root/.fly"
             export PATH="$FLYCTL_INSTALL/bin:$PATH"
             echo "Successfully Installed Flyctl"
+            echo "$FLY_API_TOKEN"
+            sh -c "flyctl auth login"
             sh -c "flyctl status"
             sh -c "flyctl deploy"
             sh -c "flyctl info"
