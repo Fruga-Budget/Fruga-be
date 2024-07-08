@@ -62,10 +62,11 @@ jobs: # a collection of steps
             export PATH="$FLYCTL_INSTALL/bin:$PATH"
             echo "Successfully Installed Flyctl"
             echo "$FLY_API_TOKEN"
-            sh -c "flyctl auth login"
-            sh -c "flyctl status"
-            sh -c "flyctl deploy"
-            sh -c "flyctl info"
+            flyctl version
+            flyctl auth token "$FLY_API_TOKEN"
+            flyctl deploy
+            flyctl status
+            flyctl info
             exit 0
 workflows:
   build-test-deploy:
