@@ -61,6 +61,7 @@ jobs: # a collection of steps
             export FLYCTL_INSTALL="/root/.fly"
             export PATH="$FLYCTL_INSTALL/bin:$PATH"
             echo "Successfully Installed Flyctl"
+            echo "$FLY_API_TOKEN"
             sh -c "flyctl status"
             sh -c "flyctl deploy"
             sh -c "flyctl info"
