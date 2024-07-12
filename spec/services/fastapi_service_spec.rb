@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Python Service" do
+RSpec.describe "Python Service", type: :service, vcr: true do
   it "exists" do
     service = FastapiService.new
 
@@ -16,7 +16,19 @@ RSpec.describe "Python Service" do
 
       advice = FastapiService.generate_advice(total_income, needs, wants, savings)
 
-      
+      binding.pry
+      expect(advice)
+    end
+
+    it "returns error when there is an invalid input" do
+      total_income = nil
+      needs = 2000
+      wants = 800
+      savings = 600
+
+      advice = FastapiService.generate_advice(total_income, needs, wants, savings)
+
+      expect(advice).to raise_error(StandardError, "Something went wrong")
     end
   end
 end
