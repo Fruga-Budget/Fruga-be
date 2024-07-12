@@ -26,7 +26,7 @@ end
   end
 
   def self.connection
-    Faraday.new('https://localhost:8000/') #this may change based off fruga-py-service main.py file
+    Faraday.new('http://localhost:8000/') #this may change based off fruga-py-service main.py file
   end
 
   def self.parse_response(response)
