@@ -1,7 +1,7 @@
 class FastapiService
 
 def self.generate_advice(total_income, needs, wants, savings)
-  url = "generate_advice" #this will probably change
+  url = "v1/generate_advice" #this will probably change
   params = {
     total_income: total_income,
     needs: needs,
