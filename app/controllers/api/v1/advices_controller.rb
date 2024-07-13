@@ -20,7 +20,8 @@ class AdvicesController < ApplicationController
       recommendation: recommendation
     }
 
-    recommendation = AdviceGenerator.new(total_income, needs, wants, savings).check_to_call_api
+    ready_to_generate = AdviceGenerator.new(total_income, needs, wants, savings)
+    recommendation = ready_to_generate.check_to_call_api
 
     render json: AdviceSerializer.new(advice), status: :ok
   end

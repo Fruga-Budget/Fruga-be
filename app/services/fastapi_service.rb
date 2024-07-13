@@ -1,7 +1,7 @@
 class FastapiService
 
 def self.generate_advice(total_income, needs, wants, savings)
-  url = "v1/generate_advice" #this will probably change
+  url = "/v1/generate_advice" #this will probably change
   params = {
     total_income: total_income,
     needs: needs,
@@ -17,6 +17,7 @@ end
 
   def self.call_api(url, params = {})
     response = connection.post(url) do |request|
+      binding.pry
       request.headers['Content-Type'] = 'application/json'
       request.body = params.to_json
     end
@@ -26,7 +27,7 @@ end
   end
 
   def self.connection
-    Faraday.new('http://localhost:8000/') #this may change based off fruga-py-service main.py file
+    Faraday.new(url: "http://localhost:8000") #this may change based off fruga-py-service main.py file
   end
 
   def self.parse_response(response)
