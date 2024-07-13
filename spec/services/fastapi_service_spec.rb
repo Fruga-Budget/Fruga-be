@@ -10,9 +10,14 @@ RSpec.describe "Python Service", type: :service, vcr: true do
   describe "#generate_advice" do
     it "returns json response with given input" do
       total_income = 5000
-      needs = [{"rent" => 1800, "car" => 500, "utilities" => 600, "food" => 500}]
-      wants = [{"restaurants" => 200, "shopping" => 300}]
-      savings = [{"401k" => 200, "emergency fund" => 100}]
+      needs = [{"name" => "rent", "cost" => 1800}, 
+                {"name" => "car", "cost" => 500}, 
+                {"name" => "utilities", "cost" => 600}, 
+                {"name" => "food", "cost" => 500}]
+      wants = [{"name" => "restaurants", "cost" => 200},
+                {"name" => "shopping", "cost" => 300}]
+      savings = [{"name" => "401k","cost" => 200},
+                  {"name" => "emergency fund", "cost" => 100}]
 
       advice = FastapiService.generate_advice(total_income, needs, wants, savings)
 
@@ -22,9 +27,14 @@ RSpec.describe "Python Service", type: :service, vcr: true do
 
     xit "returns error when there is an invalid input" do
       total_income = nil
-      needs = [{"rent" => 1800, "car" => 500, "utilities" => 600, "food" => 500}]
-      wants = [{"restaurants" => 200, "shopping" => 300}]
-      savings = [{"401k" => 200, "emergency fund" => 100}]
+      needs = [{"name" => "rent", "cost" => 1800}, 
+                {"name" => "car", "cost" => 500}, 
+                {"name" => "utilities", "cost" => 600}, 
+                {"name" => "food", "cost" => 500}]
+      wants = [{"name" => "restaurants", "cost" => 200},
+                {"name" => "shopping", "cost" => 300}]
+      savings = [{"name" => "401k","cost" => 200},
+                  {"name" => "emergency fund", "cost" => 100}]
 
       advice = FastapiService.generate_advice(total_income, needs, wants, savings)
 
