@@ -1,8 +1,8 @@
-class AdviceGenerator
+class AdviceGenerator 
   attr_reader :user, :total_income, :needs, :wants, :savings
 
-  def initialize(user, total_income, needs, wants, savings)
-    @user = user
+  def initialize(total_income, needs, wants, savings) #took out user since we dont have authentication as part of MVP
+   # @user = user
     @total_income = total_income
     @needs = needs
     @wants = wants
