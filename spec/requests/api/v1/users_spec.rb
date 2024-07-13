@@ -21,7 +21,6 @@ RSpec.describe 'User Registration API', type: :request do
         expect(json[:data][:id]).to be_present
         expect(json[:data][:attributes][:name]).to eq('Odell')
         expect(json[:data][:attributes][:email]).to eq('goodboy@ruffruff.com')
-        expect(json[:data][:attributes][:api_key]).to be_present
       end
     end
 

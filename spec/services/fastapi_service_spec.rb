@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Python Service", type: :service, vcr: true do
+RSpec.describe "Python Service", type: :service, vcr: do
   it "exists" do
     service = FastapiService.new
 
@@ -10,9 +10,9 @@ RSpec.describe "Python Service", type: :service, vcr: true do
   describe "#generate_advice" do
     it "returns json response with given input" do
       total_income = 5000
-      needs = 2000
-      wants = 800
-      savings = 600
+      needs = [{rent: 1800, car: 500, utilities: 600, food: 500}]
+      wants = [{restaurants: 200, shopping: 300}]
+      savings = [{"401k" => 200, "emergency fund" => 100}]
 
       advice = FastapiService.generate_advice(total_income, needs, wants, savings)
 
@@ -22,9 +22,9 @@ RSpec.describe "Python Service", type: :service, vcr: true do
 
     it "returns error when there is an invalid input" do
       total_income = nil
-      needs = 2000
-      wants = 800
-      savings = 600
+      needs = [{rent: 1800, car: 500, utilities: 600, food: 500}]
+      wants = [{restaurants: 200, shopping: 300}]
+      savings = [{"401k" => 200, "emergency fund" => 100}]
 
       advice = FastapiService.generate_advice(total_income, needs, wants, savings)
 
