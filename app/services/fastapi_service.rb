@@ -23,7 +23,6 @@ end
       # binding.pry
     end
     puts "Response Body: #{response.body}"
-    Rails.logger.debug "API Response: #{response.body}"
     JSON.parse(response.body, symbolize_names: true)
   rescue Faraday::Error => e
     Rails.logger.debug "API Response: #{response.body}"
