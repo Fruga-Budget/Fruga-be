@@ -17,17 +17,21 @@ end
 
   def self.call_api(url, params = {})
     response = connection.post(url) do |request|
-      binding.pry
       request.headers['Content-Type'] = 'application/json'
       request.body = params.to_json
+      puts "Request Body: #{request.body}"
+      # binding.pry
     end
+    puts "Response Body: #{response.body}"
+    Rails.logger.debug "API Response: #{response.body}"
     JSON.parse(response.body, symbolize_names: true)
   rescue Faraday::Error => e
+    Rails.logger.debug "API Response: #{response.body}"
     { error: e.message }
   end
 
   def self.connection
-    Faraday.new(url: "http://localhost:8000") #this may change based off fruga-py-service main.py file
+    Faraday.new(url: "http://127.0.0.1:8000") #this may change based off fruga-py-service main.py file
   end
 
   def self.parse_response(response)

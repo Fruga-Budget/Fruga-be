@@ -6,6 +6,9 @@ class AdvicesController < ApplicationController
     wants = params[:wants]
     savings = params[:savings]
 
+    ready_to_generate = AdviceGenerator.new(total_income, needs, wants, savings)
+    recommendation = ready_to_generate.check_to_call_api
+
     needs_total = needs.sum { |need| need[:cost].to_f }
     wants_total = wants.sum { |want| want[:cost].to_f }
 
@@ -20,12 +23,9 @@ class AdvicesController < ApplicationController
       recommendation: recommendation
     }
 
-    ready_to_generate = AdviceGenerator.new(total_income, needs, wants, savings)
-    recommendation = ready_to_generate.check_to_call_api
-
     render json: AdviceSerializer.new(advice), status: :ok
   end
-
+  
   private
 
   def advice_params
