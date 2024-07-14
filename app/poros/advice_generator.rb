@@ -1,7 +1,8 @@
 class AdviceGenerator
-  attr_reader :total_income, :needs, :wants, :savings
+  attr_reader :user, :total_income, :needs, :wants, :savings
 
-  def initialize(total_income, needs, wants, savings)
+  def initialize(user, total_income, needs, wants, savings)
+    @user = user
     @total_income = total_income
     @needs = needs
     @wants = wants
@@ -31,11 +32,6 @@ class AdviceGenerator
   end
 
   def calculate_total(items)
-    return 0 if items.nil? || items.empty?
-
-    items.compact.sum do |item|
-      cost = item['cost']
-      cost.to_f
-    end
+    items.sum { |item| item[:cost] }
   end
 end
