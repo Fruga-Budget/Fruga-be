@@ -1,11 +1,9 @@
 class Api::V1::SessionsController < ApplicationController
   def create
-    binding.pry
-    user = User.find_by(email: params[:email])
-    binding.pry
-    if user&.authenticate(params[:password])
-      token = encode_token({ user_id: user.id })
-      render json: { token: token }, status: :ok
+    user = User.find_by(email: session_params[:email])
+    if user&.authenticate(session_params[:password])
+      session[:user_id] = user.id
+      render json: { message: 'Logged in successfully' }, status: :ok
     else
       render json: { error: 'Invalid email or password' }, status: :unauthorized
     end
@@ -18,6 +16,9 @@ class Api::V1::SessionsController < ApplicationController
     else
       render json: { error: 'No active session' }, status: :unauthorized
     end
-    end
+  end
+
+  def session_params
+    params.permit(:email, :password)
   end
 end
