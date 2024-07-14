@@ -26,7 +26,7 @@ end
   end
 
   def self.connection
-    Faraday.new(url: "http://127.0.0.1:8000") #this may change based off fruga-py-service main.py file
+    Faraday.new(url: ENV['API_BASE_URL']) #this may change based off fruga-py-service main.py file
   end
 
   def self.parse_response(response)

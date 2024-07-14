@@ -52,6 +52,7 @@ group :development, :test do
   gem "faker"
   gem "shoulda-matchers"
   gem "orderly"
+  gem 'dotenv-rails'
   gem "debug", platforms: %i[ mri windows ]
 end
 
