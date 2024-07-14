@@ -1,4 +1,4 @@
-class AdvicesController < ApplicationController
+class Api::V1::AdvicesController < ApplicationController
 
   def create
     total_income = params[:total_income].to_f
