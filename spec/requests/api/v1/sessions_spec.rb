@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe 'User Authentication API', type: :request do
   before do
     @user = User.create!(
-      name: 'Odell',
+      user_name: 'Odell',
       email: 'goodboy@ruffruff.com',
       password: 'treats4lyf',
       password_confirmation: 'treats4lyf'
     )
+    binding.pry
   end
 
   describe 'POST /api/v1/sessions' do
@@ -31,7 +32,8 @@ RSpec.describe 'User Authentication API', type: :request do
       it 'authenticates the user' do
         expect(response).to have_http_status(:ok)
         json = JSON.parse(response.body, symbolize_names: true)
-        expect(json[:data][:attributes][:name]).to eq(@user.name)
+        binding.pry
+        expect(json[:data][:attributes][:user_name]).to eq(@user.user_name)
         expect(json[:data][:attributes][:email]).to eq(@user.email)
       end
     end

@@ -19,13 +19,9 @@ end
     response = connection.post(url) do |request|
       request.headers['Content-Type'] = 'application/json'
       request.body = params.to_json
-      puts "Request Body: #{request.body}"
-      # binding.pry
     end
-    puts "Response Body: #{response.body}"
     JSON.parse(response.body, symbolize_names: true)
   rescue Faraday::Error => e
-    Rails.logger.debug "API Response: #{response.body}"
     { error: e.message }
   end
 

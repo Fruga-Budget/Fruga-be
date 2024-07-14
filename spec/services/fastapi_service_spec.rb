@@ -1,6 +1,25 @@
 require "rails_helper"
 
 RSpec.describe "Python Service", type: :service, vcr: true do
+  let(:needs) do
+    [
+      { 'name' => 'Rent', 'cost' => 2000, 'description' => 'Monthly rent payment', 'isNegotiable' => false },
+      { 'name' => 'Utilities', 'cost' => 500, 'description' => 'Electricity, water, etc.', 'isNegotiable' => true },
+      { 'name' => 'Groceries', 'cost' => 500, 'description' => 'Monthly groceries', 'isNegotiable' => true }
+    ]
+  end
+  let(:wants) do
+    [
+      { 'name' => 'Dining Out', 'cost' => 500, 'description' => 'Eating out at restaurants' },
+      { 'name' => 'Entertainment', 'cost' => 1000, 'description' => 'Movies, concerts, etc.' }
+    ]
+  end
+  let(:savings) do
+    [
+      { 'name' => '401k', 'cost' => 200, 'description' => 'Retirement savings' },
+      { 'name' => 'Savings Account', 'cost' => 800, 'description' => 'General savings' }
+    ]
+  end
   it "exists" do
     service = FastapiService.new
 
@@ -10,21 +29,15 @@ RSpec.describe "Python Service", type: :service, vcr: true do
   describe "#generate_advice" do
     it "returns json response with given input" do
       total_income = 5000
-      needs = [{"rent" => 1800, "car" => 500, "utilities" => 600, "food" => 500}]
-      wants = [{"restaurants" => 200, "shopping" => 300}]
-      savings = [{"401k" => 200, "emergency fund" => 100}]
 
       advice = FastapiService.generate_advice(total_income, needs, wants, savings)
 
       binding.pry
-      expect(advice)
+      expect(advice).to 
     end
 
     xit "returns error when there is an invalid input" do
       total_income = nil
-      needs = [{"rent" => 1800, "car" => 500, "utilities" => 600, "food" => 500}]
-      wants = [{"restaurants" => 200, "shopping" => 300}]
-      savings = [{"401k" => 200, "emergency fund" => 100}]
 
       advice = FastapiService.generate_advice(total_income, needs, wants, savings)
 
