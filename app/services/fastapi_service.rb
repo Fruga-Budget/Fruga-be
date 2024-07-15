@@ -26,7 +26,9 @@ end
   end
 
   def self.connection
-    Faraday.new(url: ENV['API_BASE_URL']) #this may change based off fruga-py-service main.py file
+    Faraday.new(url: ENV['API_BASE_URL']) do |faraday| #this may change based off fruga-py-service main.py file
+      faraday.ssl[:verify] = false #this is to temporarily disable ssl verification
+    end
   end
 
   def self.parse_response(response)
