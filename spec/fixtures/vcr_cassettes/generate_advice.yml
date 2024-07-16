@@ -1,0 +1,52 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://fruga-py-service.fly.dev:8080/v1/generate_advice
+    body:
+      encoding: UTF-8
+      string: '{"total_income":5000,"needs":[{"name":"Rent","cost":2000,"description":"Monthly
+        rent payment","isNegotiable":false},{"name":"Utilities","cost":500,"description":"Electricity,
+        water, etc.","isNegotiable":true},{"name":"Groceries","cost":500,"description":"Monthly
+        groceries","isNegotiable":true}],"wants":[{"name":"Dining Out","cost":500,"description":"Eating
+        out at restaurants"},{"name":"Entertainment","cost":1000,"description":"Movies,
+        concerts, etc."}],"savings":[{"name":"401k","cost":200,"description":"Retirement
+        savings"},{"name":"Savings Account","cost":800,"description":"General savings"}]}'
+    headers:
+      User-Agent:
+      - Faraday v2.9.2
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 16 Jul 2024 02:02:52 GMT
+      Server:
+      - Fly/1776b880 (2024-07-15)
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 fly.io
+      Fly-Request-Id:
+      - 01J2WMEDFAH9ZB45JB7WH7NXMV-atl
+    body:
+      encoding: ASCII-8BIT
+      string: '{"advice":"The user''s budget does not match the 50/30/20 rule. Here
+        are specific recommendations:\n\n- Reduce Dining Out by $100 (negotiable)\n-
+        Reduce Entertainment by $100\n- Increase Savings Account by $200\n\nRevised
+        budget breakdown to meet the 50/30/20 rule:\n\n- Needs: $2500 (50%)\n  - Rent:
+        $2000\n  - Utilities: $300\n  - Groceries: $200\n\n- Wants: $2000 (40%)\n  -
+        Dining Out: $400\n  - Entertainment: $900\n\n- Savings: $1000 (20%)\n  - 401k:
+        $200\n  - Savings Account: $800\n\nThis revised budget aligns with the 50/30/20
+        rule."}'
+  recorded_at: Tue, 16 Jul 2024 02:02:54 GMT
+recorded_with: VCR 6.2.0

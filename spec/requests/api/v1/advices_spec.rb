@@ -29,7 +29,7 @@ RSpec.describe AdviceGenerator, type: :service do
       VCR.use_cassette('generate_advice') do
         result = subject.check_to_call_api
         expect(result).to_not be(nil)
-        expect(result).to include("The user's budget does not currently match the")
+        expect(result).to include("The user's budget does not match the 50/30/20 rule. Here are specific recommendations:\n\n- Reduce Dining Out by $100 (negotiable)\n- Reduce Entertainment by $100\n- Increase Savings Account by $200\n\nRevised budget breakdown to meet the 50/30/20 rule:\n\n- Needs: $2500 (50%)\n  - Rent: $2000\n  - Utilities: $300\n  - Groceries: $200\n\n- Wants: $2000 (40%)\n  - Dining Out: $400\n  - Entertainment: $900\n\n- Savings: $1000 (20%)\n  - 401k: $200\n  - Savings Account: $800\n\nThis revised budget aligns with the 50/30/20 rule.")
       end
     end
 
