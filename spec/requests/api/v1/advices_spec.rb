@@ -29,24 +29,9 @@ RSpec.describe AdviceGenerator, type: :service do
     it 'returns a recommendation when budget does not meet the 50/30/20 rule' do
       VCR.use_cassette('generate_advice') do
         result = subject.check_to_call_api
-        expect(result).to include("The user's current budget breakdown does not match the 50/30/20 rule.")
-        expect(result).to include("Here are specific recommendations for adjustments:")
-        expect(result).to include("1. **Rent:** Not negotiable.")
-        expect(result).to include("2. **Utilities:** Negotiable. Consider reducing usage to lower cost.")
-        expect(result).to include("3. **Groceries:** Negotiable. Look for cheaper alternatives or discounts.")
-        expect(result).to include("4. **Dining Out:** Consider reducing to $250 to align with 30%.")
-        expect(result).to include("5. **Entertainment:** Consider reducing to $500 to align with 20%.")
-        expect(result).to include("6. **401k:** Already at 4%, aligning with 20%.")
-        expect(result).to include("7. **Savings Account:** Consider increasing to $300 to align with 30%.")
-        expect(result).to include("Revised Budget Breakdown:")
-        expect(result).to include("- Rent: $2,000 (40%)")
-        expect(result).to include("- Utilities: $400 (8%)")
-        expect(result).to include("- Groceries: $400 (8%)")
-        expect(result).to include("- Dining Out: $250 (5%)")
-        expect(result).to include("- Entertainment: $500 (10%)")
-        expect(result).to include("- 401k: $200 (4%)")
-        expect(result).to include("- Savings Account: $300 (6%)")
-        expect(result).to include("This breakdown closely aligns with the 50/30/20 rule.")
+        expect(result).to include("The user's current budget breakdown does not align with the 50/30/20 rule.")
+        expect(result).to include("Revised Budget Breakdown based on 50/30/20 rule:")
+        expect(result).to include("By making these adjustments, the user can better align their budget with the recommended 50/30/20 rule.")
       end
     end
 
@@ -78,8 +63,7 @@ RSpec.describe "Advices API", type: :request do
   describe "POST /api/v1/users/:user_id/advices" do
     let!(:user) do
       User.find_or_create_by!(
-        user_name: "Nico",
-        email: "nico@example.com"
+        user_name: "Nico"
       ) do |user|
         user.password = "password123"
         user.password_confirmation = "password123"

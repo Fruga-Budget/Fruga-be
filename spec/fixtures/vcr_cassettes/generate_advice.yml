@@ -2,59 +2,6 @@
 http_interactions:
 - request:
     method: post
-    uri: https://fruga-py-service.fly.dev:8080/v1/generate_advice
-    body:
-      encoding: UTF-8
-      string: '{"total_income":5000,"needs":[{"name":"Rent","cost":2000,"description":"Monthly
-        rent payment","isNegotiable":false},{"name":"Utilities","cost":500,"description":"Electricity,
-        water, etc.","isNegotiable":true},{"name":"Groceries","cost":500,"description":"Monthly
-        groceries","isNegotiable":true}],"wants":[{"name":"Dining Out","cost":500,"description":"Eating
-        out at restaurants"},{"name":"Entertainment","cost":1000,"description":"Movies,
-        concerts, etc."}],"savings":[{"name":"401k","cost":200,"description":"Retirement
-        savings"},{"name":"Savings Account","cost":800,"description":"General savings"}]}'
-    headers:
-      User-Agent:
-      - Faraday v2.9.2
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Tue, 23 Jul 2024 02:28:26 GMT
-      Server:
-      - Fly/8cd7493c4 (2024-07-19)
-      Content-Type:
-      - application/json
-      Transfer-Encoding:
-      - chunked
-      Via:
-      - 1.1 fly.io
-      Fly-Request-Id:
-      - 01J3EPP8ENWS87F866Y0ANYXFY-atl
-    body:
-      encoding: ASCII-8BIT
-      string: '{"advice":"The user''s current budget breakdown does not match the
-        50/30/20 rule. Here are specific recommendations for adjustments:\n\n1. **Rent:**
-        Not negotiable. This should ideally be 50% of income, but it''s already at
-        40%.\n\n2. **Utilities:** Negotiable. Consider reducing usage to lower cost.\n\n3.
-        **Groceries:** Negotiable. Look for cheaper alternatives or discounts.\n\n4.
-        **Dining Out:** Consider reducing to $250 to align with 30%.\n\n5. **Entertainment:**
-        Consider reducing to $500 to align with 20%.\n\n6. **401k:** Already at 4%,
-        aligning with 20%.\n\n7. **Savings Account:** Consider increasing to $300
-        to align with 30%.\n\nRevised Budget Breakdown:\n- Rent: $2,000 (40%)\n- Utilities:
-        $400 (8%)\n- Groceries: $400 (8%)\n- Dining Out: $250 (5%)\n- Entertainment:
-        $500 (10%)\n- 401k: $200 (4%)\n- Savings Account: $300 (6%)\n\nThis breakdown
-        closely aligns with the 50/30/20 rule."}'
-  recorded_at: Tue, 23 Jul 2024 02:28:30 GMT
-- request:
-    method: post
     uri: https://fruga-py-service.fly.dev/v1/generate_advice
     body:
       encoding: UTF-8
@@ -80,7 +27,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 23 Jul 2024 19:53:18 GMT
+      - Tue, 23 Jul 2024 21:40:39 GMT
       Server:
       - Fly/13e8d1944 (2024-07-23)
       Content-Type:
@@ -90,18 +37,16 @@ http_interactions:
       Via:
       - 1.1 fly.io
       Fly-Request-Id:
-      - 01J3GJFEX1018A8SVNFA6X2DBT-atl
+      - 01J3GRM1RSC6F1N6T2AJA6TE6H-atl
     body:
       encoding: ASCII-8BIT
-      string: '{"advice":"Based on the provided budget breakdown, the user''s current
-        allocation does not align with the 50/30/20 rule. Here are specific recommendations
-        to adjust their budget:\n\n1. Reduce Dining Out and Entertainment expenses
-        to align with the 30% wants category.\n2. Increase savings allocation to meet
-        the 20% savings category.\n3. Consider negotiating Utilities and Groceries
-        costs to free up more funds for savings and wants.\n\nRevised Budget Breakdown
-        to align with 50/30/20 rule:\n- Needs (50%):\n  - Rent: $2000\n  - Utilities:
-        $400\n  - Groceries: $3000\n- Wants (30%):\n  - Dining Out: $200\n  - Entertainment:
-        $300\n- Savings (20%):\n  - 401k: $200\n  - Savings Account: $800\n\nTotal
-        Income: $5000"}'
-  recorded_at: Tue, 23 Jul 2024 19:53:21 GMT
+      string: '{"advice":"The user''s current budget breakdown does not align with
+        the 50/30/20 rule. To adjust their budget, they can consider reducing the
+        cost of dining out and entertainment, as these are wants and negotiable expenses.
+        \n\nRevised Budget Breakdown based on 50/30/20 rule:\n- Needs (50%): $2500\n   -
+        Rent: $2000\n   - Utilities: $250\n   - Groceries: $250\n\n- Wants (30%):
+        $1500\n   - Dining Out: $250\n   - Entertainment: $1250\n\n- Savings (20%):
+        $1000\n   - 401k: $200\n   - Savings Account: $800\n\nBy making these adjustments,
+        the user can better align their budget with the recommended 50/30/20 rule."}'
+  recorded_at: Tue, 23 Jul 2024 21:40:43 GMT
 recorded_with: VCR 6.2.0

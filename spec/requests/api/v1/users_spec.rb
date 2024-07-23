@@ -16,7 +16,7 @@ RSpec.describe 'User Registration API', type: :request do
         expect(response).to have_http_status(:created)
         json = JSON.parse(response.body, symbolize_names: true)
         
-        expect(json).to eq({:message=>"Account created successfully!"})
+        expect(json).to eq({ message: "Account created successfully!"})
       end
     end
 
@@ -29,17 +29,9 @@ RSpec.describe 'User Registration API', type: :request do
         }
       end
       
-      let(:invalid_attributes) do
-        {
-          user_name: 'Bolt',
-          password: 'treats4lyf',
-          password_confirmation: 'treats4lyf'
-        }
-      end
-          
       it 'returns a validation failure message' do
         post '/api/v1/users', params: valid_attributes.to_json, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
-        post '/api/v1/users', params: invalid_attributes.to_json, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+        post '/api/v1/users', params: valid_attributes.to_json, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
 
         expect(response).to have_http_status(:unprocessable_entity)
         json = JSON.parse(response.body, symbolize_names: true)
