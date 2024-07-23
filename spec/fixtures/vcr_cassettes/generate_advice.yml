@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://fruga-py-service.fly.dev/v1/generate_advice
+    uri: https://fruga-py-service.fly.dev:8080/v1/generate_advice
     body:
       encoding: UTF-8
       string: '{"total_income":5000,"needs":[{"name":"Rent","cost":2000,"description":"Monthly
