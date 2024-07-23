@@ -1,0 +1,53 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://fruga-py-service.fly.dev/v1/generate_advice
+    body:
+      encoding: UTF-8
+      string: '{"total_income":5000.0,"needs":[{"name":"Rent","cost":1500,"description":"Monthly
+        rent payment","isNegotiable":false},{"name":"Utilities","cost":300,"description":"Electricity,
+        water, etc.","isNegotiable":true}],"wants":[{"name":"Gym Membership","cost":50,"description":"Monthly
+        gym membership"},{"name":"Dining Out","cost":200,"description":"Eating out
+        at restaurants"}],"savings":[{"name":"Emergency Fund","cost":500,"description":"Emergency
+        savings fund"},{"name":"Retirement","cost":300,"description":"Retirement savings"}]}'
+    headers:
+      User-Agent:
+      - Faraday v2.9.2
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 23 Jul 2024 19:59:43 GMT
+      Server:
+      - Fly/13e8d1944 (2024-07-23)
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 fly.io
+      Fly-Request-Id:
+      - 01J3GJV72YT93APCSYMH9K87ZP-atl
+    body:
+      encoding: ASCII-8BIT
+      string: '{"advice":"The user''s budget currently does not match the 50/30/20
+        rule. Here are some specific recommendations on how they can adjust their
+        budget:\n\n1. Modify the Gym Membership and Dining Out categories as wants
+        are more flexible:\n   - Reduce Gym Membership cost to $30\n   - Reduce Dining
+        Out cost to $150\n\nRevised budget breakdown based on the 50/30/20 rule:\n-
+        Needs (50%): $1800\n- Wants (30%): $750\n- Savings (20%): $750\n\nNew breakdown:\n-
+        Rent: $1500\n- Utilities: $300\n- Gym Membership: $30\n- Dining Out: $150\n-
+        Emergency Fund: $500\n- Retirement: $250\n\nThis revised budget allocation
+        aligns more closely with the 50/30/20 rule, ensuring a balanced approach to
+        spending, saving, and financial security."}'
+  recorded_at: Tue, 23 Jul 2024 19:59:46 GMT
+recorded_with: VCR 6.2.0
