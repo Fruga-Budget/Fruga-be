@@ -70,8 +70,9 @@ jobs:
           command: |
             apk add --no-cache curl
             curl -L https://fly.io/install.sh | sh
-            export FLYCTL_INSTALL="/home/circleci/.fly"
-            export PATH="$FLYCTL_INSTALL/bin:$PATH"
+            echo 'export FLYCTL_INSTALL="/root/.fly"' >> $BASH_ENV
+            echo 'export PATH="$FLYCTL_INSTALL/bin:$PATH"' >> $BASH_ENV
+            source $BASH_ENV
             echo "Successfully Installed Flyctl"
             flyctl version
 
