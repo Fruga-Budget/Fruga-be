@@ -47,6 +47,7 @@ RSpec.describe AdviceGenerator, type: :service do
         expect(result).to include("- 401k: $200 (4%)")
         expect(result).to include("- Savings Account: $300 (6%)")
         expect(result).to include("This breakdown closely aligns with the 50/30/20 rule.")
+      end
     end
 
     it 'returns a success message when budget meets the 50/30/20 rule' do
