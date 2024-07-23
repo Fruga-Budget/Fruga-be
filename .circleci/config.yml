@@ -42,8 +42,8 @@ jobs:
       # Install SSL certificates
       - run:
           name: Install SSL certificates
-          command: apt-get update && apt-get install -y ca-certificates
-          
+          command: sudo apt-get update && sudo apt-get install -y ca-certificates
+
       # Wait for PostgreSQL to be ready
       - run:
           name: Wait for DB
