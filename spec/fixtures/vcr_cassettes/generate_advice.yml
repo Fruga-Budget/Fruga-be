@@ -27,9 +27,9 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 16 Jul 2024 02:02:52 GMT
+      - Tue, 23 Jul 2024 02:28:26 GMT
       Server:
-      - Fly/1776b880 (2024-07-15)
+      - Fly/8cd7493c4 (2024-07-19)
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -37,16 +37,20 @@ http_interactions:
       Via:
       - 1.1 fly.io
       Fly-Request-Id:
-      - 01J2WMEDFAH9ZB45JB7WH7NXMV-atl
+      - 01J3EPP8ENWS87F866Y0ANYXFY-atl
     body:
       encoding: ASCII-8BIT
-      string: '{"advice":"The user''s budget does not match the 50/30/20 rule. Here
-        are specific recommendations:\n\n- Reduce Dining Out by $100 (negotiable)\n-
-        Reduce Entertainment by $100\n- Increase Savings Account by $200\n\nRevised
-        budget breakdown to meet the 50/30/20 rule:\n\n- Needs: $2500 (50%)\n  - Rent:
-        $2000\n  - Utilities: $300\n  - Groceries: $200\n\n- Wants: $2000 (40%)\n  -
-        Dining Out: $400\n  - Entertainment: $900\n\n- Savings: $1000 (20%)\n  - 401k:
-        $200\n  - Savings Account: $800\n\nThis revised budget aligns with the 50/30/20
-        rule."}'
-  recorded_at: Tue, 16 Jul 2024 02:02:54 GMT
+      string: '{"advice":"The user''s current budget breakdown does not match the
+        50/30/20 rule. Here are specific recommendations for adjustments:\n\n1. **Rent:**
+        Not negotiable. This should ideally be 50% of income, but it''s already at
+        40%.\n\n2. **Utilities:** Negotiable. Consider reducing usage to lower cost.\n\n3.
+        **Groceries:** Negotiable. Look for cheaper alternatives or discounts.\n\n4.
+        **Dining Out:** Consider reducing to $250 to align with 30%.\n\n5. **Entertainment:**
+        Consider reducing to $500 to align with 20%.\n\n6. **401k:** Already at 4%,
+        aligning with 20%.\n\n7. **Savings Account:** Consider increasing to $300
+        to align with 30%.\n\nRevised Budget Breakdown:\n- Rent: $2,000 (40%)\n- Utilities:
+        $400 (8%)\n- Groceries: $400 (8%)\n- Dining Out: $250 (5%)\n- Entertainment:
+        $500 (10%)\n- 401k: $200 (4%)\n- Savings Account: $300 (6%)\n\nThis breakdown
+        closely aligns with the 50/30/20 rule."}'
+  recorded_at: Tue, 23 Jul 2024 02:28:30 GMT
 recorded_with: VCR 6.2.0

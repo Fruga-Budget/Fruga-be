@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+
 RSpec.describe AdviceGenerator, type: :service do
   let(:total_income) { 5000 }
   let(:needs) do
@@ -29,7 +30,24 @@ RSpec.describe AdviceGenerator, type: :service do
       VCR.use_cassette('generate_advice') do
         result = subject.check_to_call_api
         expect(result).to_not be(nil)
-        expect(result).to include("The user's budget does not match the 50/30/20 rule. Here are specific recommendations:\n\n- Reduce Dining Out by $100 (negotiable)\n- Reduce Entertainment by $100\n- Increase Savings Account by $200\n\nRevised budget breakdown to meet the 50/30/20 rule:\n\n- Needs: $2500 (50%)\n  - Rent: $2000\n  - Utilities: $300\n  - Groceries: $200\n\n- Wants: $2000 (40%)\n  - Dining Out: $400\n  - Entertainment: $900\n\n- Savings: $1000 (20%)\n  - 401k: $200\n  - Savings Account: $800\n\nThis revised budget aligns with the 50/30/20 rule.")
+        expect(result).to include("The user's current budget breakdown does not match the 50/30/20 rule.")
+        expect(result).to include("Here are specific recommendations for adjustments:")
+        expect(result).to include("1. **Rent:** Not negotiable.")
+        expect(result).to include("2. **Utilities:** Negotiable. Consider reducing usage to lower cost.")
+        expect(result).to include("3. **Groceries:** Negotiable. Look for cheaper alternatives or discounts.")
+        expect(result).to include("4. **Dining Out:** Consider reducing to $250 to align with 30%.")
+        expect(result).to include("5. **Entertainment:** Consider reducing to $500 to align with 20%.")
+        expect(result).to include("6. **401k:** Already at 4%, aligning with 20%.")
+        expect(result).to include("7. **Savings Account:** Consider increasing to $300 to align with 30%.")
+        expect(result).to include("Revised Budget Breakdown:")
+        expect(result).to include("- Rent: $2,000 (40%)")
+        expect(result).to include("- Utilities: $400 (8%)")
+        expect(result).to include("- Groceries: $400 (8%)")
+        expect(result).to include("- Dining Out: $250 (5%)")
+        expect(result).to include("- Entertainment: $500 (10%)")
+        expect(result).to include("- 401k: $200 (4%)")
+        expect(result).to include("- Savings Account: $300 (6%)")
+        expect(result).to include("This breakdown closely aligns with the 50/30/20 rule.")
       end
     end
 
@@ -53,6 +71,53 @@ RSpec.describe AdviceGenerator, type: :service do
         result = service.check_to_call_api
         expect(result).to include("Congratulations, you're on the right track for the 50/30/20 rule of budgeting!")
       end
+    end
+  end
+end
+
+RSpec.describe "Advices API", type: :request do
+  describe "POST /api/v1/users/:user_id/advices" do
+    let!(:user) do
+      User.find_or_create_by!(
+        user_name: "Nico",
+        email: "nico@example.com"
+      ) do |user|
+        user.password = "password123"
+        user.password_confirmation = "password123"
+      end
+    end
+
+    let(:valid_params) do
+      {
+        advice: {
+          total_income: 5000,
+          needs: [
+            { name: "Rent", cost: 1500, isNegotiable: false, description: "Monthly rent payment" },
+            { name: "Utilities", cost: 300, isNegotiable: true, description: "Electricity, water, etc." }
+          ],
+          wants: [
+            { name: "Gym Membership", cost: 50, description: "Monthly gym membership" },
+            { name: "Dining Out", cost: 200, description: "Eating out at restaurants" }
+          ],
+          savings: [
+            { name: "Emergency Fund", cost: 500, description: "Emergency savings fund" },
+            { name: "Retirement", cost: 300, description: "Retirement savings" }
+          ]
+        }
+      }
+    end
+
+    it "creates advice and returns the expected response" do
+      post "/api/v1/users/#{user.id}/advices", params: valid_params.to_json, headers: { "Content-Type": "application/json" }
+      expect(response).to have_http_status(:ok)
+
+      json_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json_response[:data][:attributes][:total_income]).to eq(5000)
+      expect(json_response[:data][:attributes][:expenses][:needs].size).to eq(2)
+      expect(json_response[:data][:attributes][:expenses][:wants].size).to eq(2)
+      expect(json_response[:data][:attributes][:expenses][:savings].size).to eq(2)
+      expect(json_response[:data][:attributes][:advice]).not_to be_empty
     end
   end
 end
