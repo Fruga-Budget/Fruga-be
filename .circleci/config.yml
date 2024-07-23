@@ -39,10 +39,14 @@ jobs:
           name: Bundle Install
           command: bundle install --path vendor/bundle
 
-      # Install SSL certificates
+      # Install SSL certificates and set CA path
       - run:
           name: Install SSL certificates
-          command: sudo apt-get update && sudo apt-get install -y ca-certificates
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y ca-certificates
+            echo "export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt" >> $BASH_ENV
+            source $BASH_ENV
 
       # Wait for PostgreSQL to be ready
       - run:
