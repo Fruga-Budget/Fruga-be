@@ -9,7 +9,7 @@ def self.generate_advice(total_income, needs, wants, savings)
     savings: format_savings(savings)
   }
 
-  puts "Sending params to external API: #{params.to_json}"
+  # puts "Sending params to external API: #{params.to_json}"
   response = call_api(url, params) 
   parse_response(response)
 end
@@ -17,12 +17,12 @@ end
   private
 
   def self.call_api(url, params = {})
-    puts "Sending params to external API: #{params.to_json}"
+    # puts "Sending params to external API: #{params.to_json}"
     response = connection.post(url) do |request|
       request.headers['Content-Type'] = 'application/json'
       request.body = params.to_json
     end
-    puts "Received response from external API: #{response.body}"
+    # puts "Received response from external API: #{response.body}"
     JSON.parse(response.body, symbolize_names: true)
   rescue Faraday::Error => e
     { error: e.message }
