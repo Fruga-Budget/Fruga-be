@@ -4,7 +4,6 @@ RSpec.describe 'User Authentication API', type: :request do
   before do
     @user = User.create!(
       user_name: 'Odell',
-      email: 'goodboy@ruffruff.com',
       password: 'treats4lyf',
       password_confirmation: 'treats4lyf'
     )
@@ -13,14 +12,14 @@ RSpec.describe 'User Authentication API', type: :request do
   describe 'POST /api/v1/sessions' do
     let(:valid_credentials) do
       {
-        email: 'goodboy@ruffruff.com',
+        user_name: 'Odell',
         password: 'treats4lyf'
     }.to_json
     end
 
     let(:invalid_credentials) do
       {
-        email: 'goodboy@ruffruff.com',
+        user_name: 'Odell',
         password: 'wrongpassword'
     }.to_json
     end
@@ -41,7 +40,7 @@ RSpec.describe 'User Authentication API', type: :request do
       it 'returns an unauthorized status' do
         expect(response).to have_http_status(:unauthorized)
         json = JSON.parse(response.body, symbolize_names: true)
-        expect(json[:error]).to eq('Invalid email or password')
+        expect(json[:error]).to eq('Invalid user name or password')
       end
     end
   end

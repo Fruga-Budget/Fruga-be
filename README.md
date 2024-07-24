@@ -86,7 +86,6 @@ POST /api/v1/users
 ```json
 {
   user_name: 'Bolt',
-  email: 'goodboy@ruffruff.com',
   password: 'treats4lyf',
   password_confirmation: 'treats4lyf'
 }
@@ -98,7 +97,7 @@ POST /api/v1/sessions
 ```
 ```json
 {
-  email: 'goodboy@ruffruff.com',
+  user_name: 'Odell',
   password: 'treats4lyf'
 }
 ```
