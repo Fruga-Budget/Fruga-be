@@ -15,8 +15,12 @@ RSpec.describe 'User Registration API', type: :request do
         post '/api/v1/users', params: valid_attributes.to_json, headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
         expect(response).to have_http_status(:created)
         json = JSON.parse(response.body, symbolize_names: true)
-        
-        expect(json).to eq({ message: "Account created successfully!"})
+        expect(json[:data]).to have_key(:id)
+        expect(json[:data]).to have_key(:type)
+        expect(json[:data][:type]).to eq('user')
+        expect(json[:data]).to have_key(:attributes)
+        expect(json[:data][:attributes]).to have_key(:user_name)
+        expect(json[:data][:attributes][:user_name]).to eq('Bolt')
       end
     end
 

@@ -3,7 +3,7 @@ class Api::V1::SessionsController < ApplicationController
     user = User.find_by(user_name: session_params[:user_name])
     if user&.authenticate(session_params[:password])
       session[:user_id] = user.id
-      render json: { message: 'Logged in successfully' }, status: :ok
+      render json: UserSerializer.new(user).serializable_hash.to_json, status: :ok
     else
       render json: { error: 'Invalid user name or password' }, status: :unauthorized
     end
