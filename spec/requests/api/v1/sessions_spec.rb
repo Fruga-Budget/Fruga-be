@@ -30,7 +30,13 @@ RSpec.describe 'User Authentication API', type: :request do
       it 'authenticates the user' do
         expect(response).to have_http_status(:ok)
         json = JSON.parse(response.body, symbolize_names: true)
-        expect(json).to eq({:message=>"Logged in successfully"})
+        expect(json[:data]).to have_key(:id)
+        expect(json[:data][:id]).to eq(@user.id.to_s)
+        expect(json[:data]).to have_key(:type)
+        expect(json[:data][:type]).to eq('user')
+        expect(json[:data]).to have_key(:attributes)
+        expect(json[:data][:attributes]).to have_key(:user_name)
+        expect(json[:data][:attributes][:user_name]).to eq(@user.user_name)
       end
     end
 
