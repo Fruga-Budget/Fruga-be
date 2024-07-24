@@ -49,7 +49,7 @@ jobs:
 
       - name: Run RSpec Tests
         env:
-          PGHOST: localhost
+          PGHOST: https://fruga-py-service.fly.dev
           PGUSER: postgres
           PGPASSWORD: postgres
           RAILS_ENV: test
