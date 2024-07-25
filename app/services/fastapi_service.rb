@@ -16,7 +16,7 @@ end
 
   private
 
-  def self.call_api( params = {})
+  def self.call_api(url, params = {})
     # puts "Sending params to external API: #{params.to_json}"
     full_url = URI.join(ENV['API_BASE_URL'], url).to_s
 
