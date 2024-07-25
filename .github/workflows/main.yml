@@ -53,5 +53,6 @@ jobs:
           PGUSER: postgres
           PGPASSWORD: postgres
           RAILS_ENV: test
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
         run: |
           bundle exec rspec spec
