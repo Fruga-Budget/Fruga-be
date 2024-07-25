@@ -48,6 +48,10 @@ jobs:
       - run:
           name: Database setup
           command: bin/rails db:create db:migrate --trace
+          
+      - run:
+          name: Test FastAPI Service Accessibility
+          command: curl -v https://https://fruga-be.fly.dev/health
 
       # Run tests
       - run:

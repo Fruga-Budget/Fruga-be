@@ -29,7 +29,9 @@ end
   end
 
   def self.connection
-    Faraday.new(url: ENV['API_BASE_URL'])
+    Faraday.new(url: ENV['API_BASE_URL']) do |conn|
+      conn.ssl[:verify] = false # Disable SSL verification for testing
+    end
   end
 
   def self.parse_response(response)
