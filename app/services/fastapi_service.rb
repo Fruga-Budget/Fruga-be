@@ -18,6 +18,7 @@ end
 
   def self.call_api(url, params = {})
     # puts "Sending params to external API: #{params.to_json}"
+
     response = connection.post(url) do |request|
       request.headers['Content-Type'] = 'application/json'
       request.body = params.to_json
