@@ -29,7 +29,7 @@ end
   end
 
   def self.connection
-    Faraday.new(url: ENV['API_BASE_URL'])
+    Faraday.new(url: 'https://fruga-py-service.fly.dev') # ENV['API_BASE_URL']
   end
 
   def self.parse_response(response)
@@ -40,7 +40,7 @@ end
     end
   end
 
-   def self.format_needs(needs)
+  def self.format_needs(needs)
     needs.map do |need|
       {
         name: need['name'],
