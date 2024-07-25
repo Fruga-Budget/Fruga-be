@@ -16,9 +16,11 @@ end
 
   private
 
-  def self.call_api(url, params = {})
+  def self.call_api( params = {})
     # puts "Sending params to external API: #{params.to_json}"
-    response = connection.post(url) do |request|
+    full_url = URI.join(ENV['API_BASE_URL'], url).to_s
+
+    response = connection.post(full_url) do |request|
       request.headers['Content-Type'] = 'application/json'
       request.body = params.to_json
     end
@@ -29,7 +31,7 @@ end
   end
 
   def self.connection
-    Faraday.new(url: ENV['API_BASE_URL'])
+    Faraday.new
   end
 
   def self.parse_response(response)
