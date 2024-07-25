@@ -30,9 +30,10 @@ end
 
   def self.connection
     Faraday.new(url: ENV['API_BASE_URL']) do |conn|
-      conn.ssl[:verify] = false # Disable SSL verification for debugging purposes
-      conn.ssl[:debug] = true # Enable SSL debug output 
-    end
+    conn.ssl[:verify] = true # Enable SSL verification for production
+    # conn.ssl[:verify] = false # Disable SSL verification for testing only, uncomment if needed
+    conn.response :logger, ::Logger.new(STDOUT), bodies: true
+    conn.adapter Faraday.default_adapter
   end
 
   def self.parse_response(response)

@@ -48,17 +48,7 @@ jobs:
       - run:
           name: Database setup
           command: bin/rails db:create db:migrate --trace
-
-      - run:
-          name: Test FastAPI Service Accessibility
-          command: curl -v https://fruga-py-service.fly.dev/healthcheck
-
-          # Debug SSL Certificates
-      - run:
-          name: Debug SSL Certificates
-          command: |
-            openssl s_client -connect fruga-py-service.fly.dev:443 -showcerts
-
+          
       # Run tests
       - run:
           name: Run RSpec tests
