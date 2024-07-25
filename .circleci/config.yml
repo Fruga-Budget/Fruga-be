@@ -51,7 +51,13 @@ jobs:
 
       - run:
           name: Test FastAPI Service Accessibility
-          command: curl -v https://fruga-be.fly.dev/health
+          command: curl -v https://fruga-py-service.fly.dev/healthcheck
+
+          # Debug SSL Certificates
+      - run:
+          name: Debug SSL Certificates
+          command: |
+            openssl s_client -connect fruga-py-service.fly.dev:443 -showcerts
 
       # Run tests
       - run:

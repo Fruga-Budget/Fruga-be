@@ -30,7 +30,8 @@ end
 
   def self.connection
     Faraday.new(url: ENV['API_BASE_URL']) do |conn|
-      conn.ssl[:verify] = false # Disable SSL verification for testing
+      conn.ssl[:verify] = false # Disable SSL verification for debugging purposes
+      conn.ssl[:debug] = true # Enable SSL debug output 
     end
   end
 
