@@ -52,9 +52,10 @@ group :development, :test do
   gem "faker"
   gem "shoulda-matchers"
   gem "orderly"
-  gem 'dotenv-rails'
   gem "debug", platforms: %i[ mri windows ]
 end
+
+gem 'dotenv-rails'
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
