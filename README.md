@@ -46,7 +46,7 @@ The server will be available at http://localhost:3000.
 ### API Endpoints
 The API provides endpoints for managing budget-related data. Here are some example endpoints:
 
-Create advice:
+Create Advice:
 
 ```http
 POST /api/v1/users/:user_id/advices
@@ -77,7 +77,8 @@ typical response:
     "advice": "Based on the user's current budget breakdown:\n\n- Needs total: $2500\n- Wants total: $1700\n- Savings total: $1000\n\nTotal expenses: $5200, exceeding income of $5000.\n\nRecommendations:\n1. Consider reducing spending on dining out, entertainment, and shoes.\n2. Modify utilities and miscellaneous expenses if possible.\n3. Increase savings allocation if able.\n\nRevised budget breakdown to meet 50/30/20 rule:\n- Needs: $1500\n- Wants: $1500\n- Savings: $1000\n\nAdjusted allocation:\n- Rent: $1500 (unchanged)\n- Utilities: $300 (reduced)\n- Misc.: $200 (reduced)\n- Dining Out: $250 (reduced)\n- Entertainment: $250 (reduced)\n- Starbucks Coffee: $100 (reduced)\n- Shoes: $150 (reduced)\n- 401k: $200 (unchanged)\n- Savings Account: $800 (unchanged)"
 }
 ```
-Create a user:
+
+Create a User:
 Note: there is a 10 character password requirement
 
 ```http
@@ -90,18 +91,45 @@ POST /api/v1/users
   password_confirmation: 'treats4lyf'
 }
 ```
-Login a user:
+Response
+```json
+{
+  "data": {
+    "id": "4",
+    "type": "user",
+    "attributes": {
+      "user_name": "Bolt"
+    }
+  }
+}
+```
+
+Login a User:
 
 ```http
 POST /api/v1/sessions
 ```
 ```json
 {
-  user_name: 'Odell',
-  password: 'treats4lyf'
+  "user_name": "Odell",
+  "password": "treats4lyf"
 }
 ```
+Response
+```json
+{
+  "data": {
+    "id": "4",
+    "type": "user",
+    "attributes": {
+      "user_name": "Bolt"
+    }
+  }
+}
+```
+
 ### Running Tests
+
 To run the test suite, use:
 ```bash
 bundle exec rspec spec
