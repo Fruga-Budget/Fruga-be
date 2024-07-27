@@ -46,11 +46,16 @@ The server will be available at http://localhost:3000.
 ### API Endpoints
 The API provides endpoints for managing budget-related data. Here are some example endpoints:
 
-Create Advice:
+### Create Advice:
+
+**Request**
 
 ```http
 POST /api/v1/users/:user_id/advices
 ```
+
+**Body**
+
 ```json
 {
   "total_income": 5000,
@@ -78,20 +83,27 @@ typical response:
 }
 ```
 
-Create a User:
+### Create a User:
 Note: there is a 10 character password requirement
+
+**Request**
 
 ```http
 POST /api/v1/users
 ```
+
+**Body**
+
 ```json
 {
-  user_name: 'Bolt',
-  password: 'treats4lyf',
-  password_confirmation: 'treats4lyf'
+  "user_name": "Bolt",
+  "password": "treats4lyf",
+  "password_confirmation": "treats4lyf"
 }
 ```
-Response
+
+**Response**
+
 ```json
 {
   "data": {
@@ -104,18 +116,24 @@ Response
 }
 ```
 
-Login a User:
+### Login a User:
+**Request**
 
 ```http
 POST /api/v1/sessions
 ```
+
+**Body**
+
 ```json
 {
   "user_name": "Odell",
   "password": "treats4lyf"
 }
 ```
-Response
+
+**Response**
+
 ```json
 {
   "data": {
