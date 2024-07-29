@@ -60,6 +60,37 @@ RSpec.describe AdviceGenerator, type: :service do
 end
 
 RSpec.describe "Advices API", type: :request do
+
+  describe "GET /api/v1/users/:user_id/advices" do
+    it "gets all of a user's advices - empty", vcr: true do
+      user = User.create!(user_name: 'Nico', password: 'password123', password_confirmation: 'password123')
+
+      get "/api/v1/users/#{user.id}/advices", headers: { "Content-Type": "application/json" }
+      
+      expect(response).to have_http_status(:ok)
+
+      json_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json_response).to be_a (Hash)
+      expect(json_response).to have_key (:data)
+      expect(json_response[:data]).to be_a (Array)
+      expect(json_response[:data].empty?).to eq (true)
+    end
+
+    it "gets all of a user's advices - no user", vcr: true do
+      get "/api/v1/users/1/advices", headers: { "Content-Type": "application/json" }
+
+      expect(response).to have_http_status(:not_found)
+
+      json_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json_response).to be_a (Hash)
+      expect(json_response).to have_key (:error)
+      expect(json_response[:error]).to be_a (String)
+      expect(json_response[:error]).to eq ('User not found')
+    end
+  end
+
   describe "POST /api/v1/users/:user_id/advices" do
     let!(:user) do
       User.find_or_create_by!(
