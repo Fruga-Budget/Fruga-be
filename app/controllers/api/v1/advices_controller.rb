@@ -12,8 +12,7 @@ class Api::V1::AdvicesController < ApplicationController
     wants_total = wants.sum { |want| want[:cost].to_f }
     savings_total = savings.sum { |saving| saving[:cost].to_f }
 
-    advice = AdviceData.new(
-      id: SecureRandom.uuid,
+    advice = Advice.new(
       total_income: total_income,
       needs: needs,
       wants: wants,
@@ -24,7 +23,11 @@ class Api::V1::AdvicesController < ApplicationController
       recommendation: recommendation
     )
 
-    render json: AdviceSerializer.new(advice).serializable_hash.to_json, status: :ok
+    if advice.save
+      render json: AdviceSerializer.new(advice).serializable_hash.to_json, status: :ok
+    else
+      render json: { error: advice.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   private
