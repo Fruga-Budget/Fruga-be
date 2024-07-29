@@ -1,4 +1,17 @@
 class Api::V1::AdvicesController < ApplicationController
+  def index
+    user = User.find_by(id: params[:user_id])
+    if !user.nil?
+      if user.advices.empty?
+        render json: { data: [] }, status: :ok
+      else
+        render json: AdviceSerializer.new(user.advices).to_json, status: :ok
+      end
+    else
+      render json: { error: "User not found" }, status: :not_found
+    end
+  end
+  
   def create
     total_income = advice_params[:total_income].to_f
     needs = advice_params[:needs]
