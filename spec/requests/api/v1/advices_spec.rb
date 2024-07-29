@@ -95,7 +95,6 @@ RSpec.describe "Advices API", type: :request do
       expect(response).to have_http_status(:ok)
 
       json_response = JSON.parse(response.body, symbolize_names: true)
-
       expect(json_response[:data][:attributes][:total_income]).to eq(5000)
       expect(json_response[:data][:attributes][:expenses][:needs].size).to eq(2)
       expect(json_response[:data][:attributes][:expenses][:wants].size).to eq(2)

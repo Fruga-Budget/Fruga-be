@@ -7,9 +7,9 @@ class AdviceSerializer
 
   attribute :expenses do |object|
     {
-      needs: object.needs.map { |need| { name: need[:name], amount: need[:cost], description: need[:description], isNegotiable: need[:isNegotiable] } },
-      wants: object.wants.map { |want| { name: want[:name], amount: want[:cost], description: want[:description] } },
-      savings: object.savings.map { |saving| { name: saving[:name], amount: saving[:cost], description: saving[:description] } }
+      needs: object.needs.map { |need| { name: need["name"], amount: need["cost"], description: need["description"], isNegotiable: need["isNegotiable"] } },
+      wants: object.wants.map { |want| { name: want["name"], amount: want["cost"], description: want["description"] } },
+      savings: object.savings.map { |saving| { name: saving["name"], amount: saving["cost"], description: saving["description"] } }
     }
   end
 
