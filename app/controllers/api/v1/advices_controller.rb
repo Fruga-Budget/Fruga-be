@@ -13,6 +13,7 @@ class Api::V1::AdvicesController < ApplicationController
     savings_total = savings.sum { |saving| saving[:cost].to_f }
 
     advice = Advice.new(
+      user_id: user_params[:user_id],
       total_income: total_income,
       needs: needs,
       wants: wants,
@@ -22,9 +23,9 @@ class Api::V1::AdvicesController < ApplicationController
       savings_total: savings_total,
       recommendation: recommendation
     )
-
+    
     if advice.save
-      render json: AdviceSerializer.new(advice).serializable_hash.to_json, status: :ok
+      render json: AdviceSerializer.new(advice).to_json, status: :ok
     else
       render json: { error: advice.errors.full_messages }, status: :unprocessable_entity
     end
@@ -38,6 +39,12 @@ class Api::V1::AdvicesController < ApplicationController
       needs: [:name, :cost, :description, :isNegotiable], 
       wants: [:name, :cost, :description], 
       savings: [:name, :cost, :description]
+    )
+  end
+
+  def user_params
+    params.permit( 
+      :user_id
     )
   end
 end
