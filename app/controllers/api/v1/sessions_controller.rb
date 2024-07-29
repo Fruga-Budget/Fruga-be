@@ -9,14 +9,14 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
-  def destroy
-    if session[:user_id]
-      session.delete(:user_id)
-      render json: { message: 'Logged out successfully' }, status: :ok
-    else
-      render json: { error: 'No active session' }, status: :unauthorized
-    end
-  end
+  # def destroy
+  #   if session[:user_id]
+  #     session.delete(:user_id)
+  #     render json: { message: 'Logged out successfully' }, status: :ok
+  #   else
+  #     render json: { error: 'No active session' }, status: :unauthorized
+  #   end
+  # end
 
   def session_params
     params.permit(:user_name, :password)
