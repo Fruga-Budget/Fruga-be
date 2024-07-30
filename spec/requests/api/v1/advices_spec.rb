@@ -60,34 +60,70 @@ RSpec.describe AdviceGenerator, type: :service do
 end
 
 RSpec.describe "Advices API", type: :request do
-
   describe "GET /api/v1/users/:user_id/advices" do
-    it "gets all of a user's advices - empty", vcr: true do
-      user = User.create!(user_name: 'Nico', password: 'password123', password_confirmation: 'password123')
+    let!(:user) { User.create!(user_name: 'Nico', password: 'password123', password_confirmation: 'password123') }
+
+    it "gets all of a user's advices - has advices", vcr: true do
+      advice_1 = user.advices.create!(
+        needs: [
+          { name: 'Rent', cost: 1500, description: 'Monthly rent payment', isNegotiable: false },
+          { name: 'Utilities', cost: 300, description: 'Electricity, water, etc.', isNegotiable: true }
+        ],
+        wants: [
+          { name: 'Gym Membership', cost: 50, description: 'Monthly gym membership' },
+          { name: 'Dining Out', cost: 200, description: 'Eating out at restaurants' }
+        ],
+        savings: [
+          { name: 'Emergency Fund', cost: 500, description: 'Emergency savings fund' },
+          { name: 'Retirement', cost: 300, description: 'Retirement savings' }
+        ],
+        needs_total: 1800,
+        wants_total: 250,
+        savings_total: 800,
+        recommendation: 'Consider reducing dining out expenses to increase savings.',
+        total_income: 5000
+      )
 
       get "/api/v1/users/#{user.id}/advices", headers: { "Content-Type": "application/json" }
       
       expect(response).to have_http_status(:ok)
+      json_response = JSON.parse(response.body, symbolize_names: true)
+      expect(json_response[:data].size).to eq(1)
+      expect(json_response[:data][0][:id]).to eq(advice_1.id.to_s)
+      expect(json_response[:data][0][:type]).to eq("advice")
+      expect(json_response[:data][0]).to have_key(:attributes)
+      expect(json_response[:data][0][:attributes]).to have_key(:total_income)
+      expect(json_response[:data][0][:attributes][:total_income]).to be_an(Integer)
+      expect(json_response[:data][0][:attributes]).to have_key(:expenses)
+      expect(json_response[:data][0][:attributes][:expenses]).to be_a(Hash)
+      expect(json_response[:data][0][:attributes][:expenses]).to have_key(:needs)
+      expect(json_response[:data][0][:attributes][:expenses][:needs]).to be_an(Array)
+      expect(json_response[:data][0][:attributes]).to have_key(:advice)
+      expect(json_response[:data][0][:attributes][:advice].empty?).to eq(false)
+    end
 
+    it "gets all of a user's advices - empty", vcr: true do
+      get "/api/v1/users/#{user.id}/advices", headers: { "Content-Type": "application/json" }
+      
+      expect(response).to have_http_status(:ok)
       json_response = JSON.parse(response.body, symbolize_names: true)
 
-      expect(json_response).to be_a (Hash)
-      expect(json_response).to have_key (:data)
-      expect(json_response[:data]).to be_a (Array)
-      expect(json_response[:data].empty?).to eq (true)
+      expect(json_response).to be_a(Hash)
+      expect(json_response).to have_key(:data)
+      expect(json_response[:data]).to be_a(Array)
+      expect(json_response[:data].empty?).to eq(true)
     end
 
     it "gets all of a user's advices - no user", vcr: true do
       get "/api/v1/users/1/advices", headers: { "Content-Type": "application/json" }
 
       expect(response).to have_http_status(:not_found)
-
       json_response = JSON.parse(response.body, symbolize_names: true)
 
-      expect(json_response).to be_a (Hash)
-      expect(json_response).to have_key (:error)
-      expect(json_response[:error]).to be_a (String)
-      expect(json_response[:error]).to eq ('User not found')
+      expect(json_response).to be_a(Hash)
+      expect(json_response).to have_key(:error)
+      expect(json_response[:error]).to be_a(String)
+      expect(json_response[:error]).to eq('User not found')
     end
   end
 
@@ -123,7 +159,7 @@ RSpec.describe "Advices API", type: :request do
 
     it "creates advice and returns the expected response", vcr: { cassette_name: 'create_advice' } do
       post "/api/v1/users/#{user.id}/advices", params: valid_params.to_json, headers: { "Content-Type": "application/json" }
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:created)
 
       json_response = JSON.parse(response.body, symbolize_names: true)
       expect(json_response[:data][:attributes][:total_income]).to eq(5000)
@@ -134,3 +170,4 @@ RSpec.describe "Advices API", type: :request do
     end
   end
 end
+
