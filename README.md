@@ -409,7 +409,7 @@ POST /api/v1/sessions
 
 * 34 Total Tests (343 / 346 LOC (99.13%) covered)
 * 11 Request Tests (252 / 255 LOC (99.82%) covered)
-* 23 Request Tests (96 / 96 LOC (100.00%) covered)
+* 23 Model Tests (96 / 96 LOC (100.00%) covered)
 
 To run the test suite, use:
 ```bash
