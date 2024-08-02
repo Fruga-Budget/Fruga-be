@@ -38,7 +38,7 @@ class Api::V1::AdvicesController < ApplicationController
     )
     
     if advice.save
-      render json: AdviceSerializer.new(advice).to_json, status: :ok
+      render json: AdviceSerializer.new(advice).to_json, status: :created
     else
       render json: { error: advice.errors.full_messages }, status: :unprocessable_entity
     end
