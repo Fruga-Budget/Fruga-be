@@ -27,7 +27,7 @@ class AdviceGenerator
     wants_percentage = (wants_total / total_income) * 100
     savings_percentage = (savings_total / total_income) * 100
 
-    needs_percentage <= 50 && wants_percentage <= 30 && savings_percentage >= 20
+    needs_percentage <= 50 && wants_percentage <= 30 && savings_percentage >= 20 && >= 0
   end
 
   def calculate_total(items)
